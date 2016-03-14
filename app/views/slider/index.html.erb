@@ -1,4 +1,12 @@
 <style>
+  .btn {
+    border-radius: 40px;
+    width: 70px;
+    height: 26px;
+  }
+  #custom-amount {
+    width: 10em;
+  }
   #person1, #person2, #person3, #comission {
     float: left;   
     width: 300px;
@@ -84,11 +92,31 @@
     $( "#comission").slider( "value", 100 );
   });
   </script>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h7>
+        Purchase the guided tour
+      </h7>
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-md-2"><p><strong>Pay what you want!</strong></p></div>
+    <div class="col-md-1">
+      <input type="button" class="btn btn-primary btn-sm" value="$8">
+    </div>
+    <div class="col-md-1">
+      <input type="button" class="btn btn-primary btn-sm" value="$12">
+    </div>
+    <div class="col-md-1">
+      <input type="button" class="btn btn-primary btn-sm btn-active" value="$24">
+    </div>
+    <div class="col-md-3">
+      <input id = "custom-amount" type="text" class="btn btn-primary btn-sm" placeholder="Custom amount">
+    </div>
+  </div>
+</div>
 
-<p class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">
-  <span class="ui-icon ui-icon-pencil" style="float:left; margin:-2px 5px 0 0;"></span>
-  Simple Jquery Slider
-</p>
  
 <div class="order-form-split-payee">
   <div class="order-form-split-payee-label">Person 1</div>
