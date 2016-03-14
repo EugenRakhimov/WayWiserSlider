@@ -1,0 +1,34 @@
+<style>
+  #eq > span {
+    height:120px; float:left; margin:15px
+  }
+  </style>
+  <script>
+    function redistributeMoney() {
+    var person1 = $( "#person1" ).slider( "value" ),
+      person2 = $( "#person2" ).slider( "value" ),
+      person3 = $( "#person3" ).slider( "value" )
+    }
+    $(function() {
+    $( "#person1, #person2, #person3" ).slider({
+      orientation: "horizontal",
+      range: "min",
+      max: 300,
+      value: 127,
+      slide: redistributeMoney,
+      change: redistributeMoney
+    });
+    $( "#person1" ).slider( "value", 100 );
+    $( "#person2" ).slider( "value", 100 );
+    $( "#person3" ).slider( "value", 100 );
+  });
+  </script>
+
+<p class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">
+  <span class="ui-icon ui-icon-pencil" style="float:left; margin:-2px 5px 0 0;"></span>
+  Simple Jquery Slider
+</p>
+ 
+<div id="person1"></div>
+<div id="person2"></div>
+<div id="person3"></div>
