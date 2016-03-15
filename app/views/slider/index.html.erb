@@ -3,16 +3,27 @@
     border-radius: 40px;
     width: 70px;
     height: 26px;
+    font-weight: bold;
+  }
+
+  .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    /*background-color: red;*/
+    border-radius: 40px;
+    /*border:none;*/
+    outline: none;
   }
   .btn-primary {
-    background-color: #a1a7b2;    
+    background-color: #a1a7b2;  
+    border-color:   #a1a7b2;
   }
   .slider-holder {
     padding-top: 0.4em;
     padding-bottom: 0.4em;
   }
   #custom-amount {
-    width: 10em;    
+    width: 10em;   
+    font-weight: bold;
+    border-color:#a1a7b2;
   }
   ::-webkit-input-placeholder {
    color: white;
@@ -36,41 +47,41 @@
    
  
 </style>
-  <script>
-    var money_amount;
+<script>
+  var money_amount;
 
-    function setValues(id1,id2,value1,value2, dif1, dif2)
+  function setValues(id1,id2,value1,value2, dif1, dif2)
+  { 
+    $(id1).slider("value",value1+dif1)
+    $(id2).slider("value",value2+dif2)
+  }
+  function redistributeMoney(event,ui) {
+    var person1 = $( "#person1" ).slider( "value" ),
+    person2 = $( "#person2" ).slider( "value" ),
+    person3 = $( "#person3" ).slider( "value" ),
+    comission = $( "#comission" ).slider( "value" )
+    change = 900 - person1 - person2 - person3 - comission
+    var dif = change-Math.round((change/2))
+    var dif2 = change -dif 
+    if(Math.random()> 0.5)
+    {
+      var temp = dif
+      dif = dif2
+      dif2 = temp
+    }
+    if (ui.handle.parentNode.id == "person1") 
     { 
-      $(id1).slider("value",value1+dif1)
-      $(id2).slider("value",value2+dif2)
+      setValues("#person2","#person3",person2,person3, dif,dif2)
     }
-    function redistributeMoney(event,ui) {
-      var person1 = $( "#person1" ).slider( "value" ),
-      person2 = $( "#person2" ).slider( "value" ),
-      person3 = $( "#person3" ).slider( "value" ),
-      comission = $( "#comission" ).slider( "value" )
-      change = 900 - person1 - person2 - person3 - comission
-      var dif = change-Math.round((change/2))
-      var dif2 = change -dif 
-      if(Math.random()> 0.5)
-      {
-        var temp = dif
-        dif = dif2
-        dif2 = temp
-      }
-      if (ui.handle.parentNode.id == "person1") 
-      { 
-        setValues("#person2","#person3",person2,person3, dif,dif2)
-      }
-      if (ui.handle.parentNode.id == "person2"){
-        setValues("#person1","#person3",person1,person3, dif,dif2)
-      }
-      if (ui.handle.parentNode.id == "person3"){
-        setValues("#person1","#person2",person1,person2, dif,dif2)
-      }
+    if (ui.handle.parentNode.id == "person2"){
+      setValues("#person1","#person3",person1,person3, dif,dif2)
     }
+    if (ui.handle.parentNode.id == "person3"){
+      setValues("#person1","#person2",person1,person2, dif,dif2)
+    }
+  }
 
-    $(function() {
+  $(function initSliders() {
     $( "#person1, #person2, #person3" ).slider({
       orientation: "horizontal",
       range: "min",
@@ -89,20 +100,48 @@
     $( "#person2" ).slider( "value", 291 );
     $( "#person3" ).slider( "value", 291 );
     $( "#comission").slider( "value", 27 );
+    money_amount = 12
+    $("#12").removeClass( "btn-primary" )
+    $("#12").addClass("btn-success")   
   });
-  $(function(){
-    $("#8, #12, #25").click(function(event) {
-      event.preventDefault();
-      money_amount =parseFloat($(this).val().replace("$",""))
-      $("#8, #12, #25").removeClass( "btn-success" )
-      $("#8, #12, #25").addClass("btn-primary")
-      $(this).removeClass( "btn-primary" )
-      $(this).addClass("btn-success")
-    });
+$(function selectAmountByClick(){
+  $("#8, #12, #25").click(function(event) {
+    event.preventDefault();
+    money_amount =parseFloat($(this).val().replace("$",""))
+    $("#custom-amount").val("")
+    $("#8, #12, #25, #custom-amount").removeClass( "btn-success" )
+    $("#8, #12, #25, #custom-amount").addClass("btn-primary")
+    $(this).removeClass( "btn-primary" )
+    $(this).addClass("btn-success")
+  });
 
+})
+$(function selectAmountByTyping(){
+  $("#custom-amount").click(function(event) {
+    event.preventDefault();
+    $("#8, #12, #25").removeClass( "btn-success" )
+    $("#8, #12, #25").addClass("btn-primary")
+    $(this).removeClass( "btn-primary" )
+    $(this).val("$"+money_amount);
+    // $(this).addClass("btn-success")
+  });
+
+})
+$(function leaveSelectAmount(){
+  $("#custom-amount").focusout(function(event) {
+    current_value = parseFloat($(this).val().replace("$",""))
+    if (current_value) {
+      money_amount = current_value
+      $(this).val("$"+money_amount);
+    }
+    else
+    {
+      alert("You should set amount of money")
+    }
   })
-    // $( "#person1, #person2, #person3" ).on( "slide", function( event, ui ) {console.log(ui.value)} );
-  </script>
+})
+  // $( "#person1, #person2, #person3" ).on( "slide", function( event, ui ) {console.log(ui.value)} );
+</script>
 <div class = "container">
   <div class = "row">
     <div class = "col-md-4">
