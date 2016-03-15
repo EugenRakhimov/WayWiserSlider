@@ -4,71 +4,19 @@
     width: 70px;
     height: 26px;
   }
+  .slider-holder {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+  }
   #custom-amount {
     width: 10em;
   }
-  #person1, #person2, #person3, #comission {
-    float: left;   
-    width: 300px;
-    margin: 15px;
+  .ui-slider-horizontal .ui-slider-handle {
+    background-image: url("/assets/ic_code_black_18dp_2x.png");
+    background-size:     cover;
   }
-  .order-form-radio-custom-amount-button, .order-form-radio-custom-amount-input {
-    width: 70px;
-    height: auto;
-    padding: 5px 0;
-    border: 1px solid #898e97;
-    border-radius: 40px;
-    background-color: #a1a7b2;
-    line-height: 14px;
-    letter-spacing: 1px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: bold;
-    text-shadow: 1px 1px #898e97;
-    text-align: center;
-  }
-  .order-form-split-payee {
-    height: 30px;
-    margin: 5px auto 5px auto;
-    position: relative;
-    clear: both;
-  }
-  .order-form-split-payee-slider.ui-slider {
-    height: 11px;
-    background: #fff;
-    border-radius: 3px;
-    border: 1px solid #818891;
-  }
-
-  .order-form-split-payee-label {
-    float: left;
-    text-align: left;
-    width: 100px;
-    padding-left: 35px;
-    height: 21px;
-    font-size: 14px;
-  }
-  .order-form-split-payee-amount-input {
-    width: 60px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 3px;
-    float: right;
-    position: relative;
-    top: 12px;
-    line-height: 14px;
-    font-size: 13px;
-    font-weight: bold;
-    text-align: right;
-    text-overflow: ellipsis;
-  }
-  #red .ui-slider-range { background: #ef2929; }
-  #red .ui-slider-handle { border-color: #ef2929; }
-  #green .ui-slider-range { background: #8ae234; }
-  #green .ui-slider-handle { border-color: #8ae234; }
-  #blue .ui-slider-range { background: #729fcf; }
-  #blue .ui-slider-handle { border-color: #729fcf; }
-  
+   
+ 
 </style>
   <script>
     function redistributeMoney() {
@@ -92,15 +40,15 @@
     $( "#comission").slider( "value", 100 );
   });
   </script>
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
+<div class = "container">
+  <div class = "row">
+    <div class = "col-md-4">
       <h7>
         Purchase the guided tour
       </h7>
     </div>    
   </div>
-  <div class="row">
+  <div class = "row">
     <div class="col-md-2"><p><strong>Pay what you want!</strong></p></div>
     <div class="col-md-1">
       <input type="button" class="btn btn-primary btn-sm" value="$8">
@@ -115,26 +63,50 @@
       <input id = "custom-amount" type="text" class="btn btn-primary btn-sm" placeholder="Custom amount">
     </div>
   </div>
+  <div class = "row">
+    <div class = "col-md-1">
+      <p>Person 1</p>
+    </div>
+    <div class="col-md-4 slider-holder ">
+      <div id= "person1" ></div>
+    </div>    
+    <div class = "col-md-2">
+      <input type = "text" class="btn btn-success">
+    </div>    
+  </div>
+  <div class = "row">
+    <div class = "col-md-1">
+      <p>Person 2</p>
+    </div>
+    <div class="col-md-4 slider-holder ">
+      <div id= "person2" ></div>
+    </div>    
+    <div class = "col-md-2">
+      <input type = "text" class="btn btn-success">
+    </div>    
+  </div>
+  <div class = "row">
+    <div class = "col-md-1">
+      <p>Person 3</p>
+    </div>
+    <div class="col-md-4 slider-holder ">
+      <div id= "person3" ></div>
+    </div>    
+    <div class = "col-md-2">
+      <input type = "text" class="btn btn-success">
+    </div>    
+  </div>
+  <div class = "row">
+    <div class = "col-md-1">
+      <p>Comission</p>
+    </div>
+    <div class="col-md-4 slider-holder ">
+      <div id= "comission" ></div>
+    </div>    
+    <div class = "col-md-2">
+      <input type = "text" class="btn btn-success">
+    </div>    
+  </div>
 </div>
 
  
-<div class="order-form-split-payee">
-  <div class="order-form-split-payee-label">Person 1</div>
-  <div id="person1" class="order-form-split-payee-slider.ui-slider"></div>
-  <input type="text" class="order-form-split-payee-amount-input btn btn-success">
-</div>
-<div class="order-form-split-payee">
-  <div class="order-form-split-payee-label">Person 2</div>
-  <div id="person2" class="order-form-split-payee-slider.ui-slider"></div>
-  <input type="text" class="order-form-split-payee-amount-input">
-</div>
-<div class="order-form-split-payee">
-  <div class="order-form-split-payee-label" class="order-form-split-payee-slider.ui-slider">Person 3</div>
-  <div id="person3"></div>
-  <input type="text" class="order-form-split-payee-amount-input btn btn-success">
-</div>
-<div class="order-form-split-payee">
-  <div class="order-form-split-payee-label" class="order-form-split-payee-slider.ui-slider">Person 4</div>
-  <div id="comission"></div>
-  <input type="text" class="order-form-split-payee-amount-input btn btn-success">
-</div>
