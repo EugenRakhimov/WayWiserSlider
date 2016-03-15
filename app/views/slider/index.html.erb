@@ -60,15 +60,17 @@
     person2 = $( "#person2" ).slider( "value" ),
     person3 = $( "#person3" ).slider( "value" ),
     comission = $( "#comission" ).slider( "value" )
-    change = 900 - person1 - person2 - person3 - comission
-    var dif = change-Math.round((change/2))
-    var dif2 = change -dif 
-    if(Math.random()> 0.5)
-    {
-      var temp = dif
-      dif = dif2
-      dif2 = temp
-    }
+    change = 900 - person1 - person2 - person3
+    var dif = Math.round((change/2))
+    var dif2 = change-dif 
+    console.log(dif, dif2, change)
+    console.log(person1,person2,person3)
+    // if(Math.random()> 0.5)
+    // {
+    //   var temp = dif
+    //   dif = dif2
+    //   dif2 = temp
+    // }
     if (ui.handle.parentNode.id == "person1") 
     { 
       setValues("#person2","#person3",person2,person3, dif,dif2)
@@ -80,6 +82,17 @@
       setValues("#person1","#person2",person1,person2, dif,dif2)
     }
   }
+  function setActive(element)
+  {
+    money_amount =parseFloat($(element).val().replace("$",""))
+    $(element).removeClass( "btn-primary" )
+    $(element).addClass("btn-success")
+  }
+  function resetElements()
+  {
+    $("#8, #12, #25, #custom-amount").removeClass( "btn-success" )
+    $("#8, #12, #25, #custom-amount").addClass("btn-primary")
+  }
 
   $(function initSliders() {
     $( "#person1, #person2, #person3" ).slider({
@@ -87,7 +100,8 @@
       range: "min",
       max: 900,
       value: 127,
-      slide: redistributeMoney
+      slide: redistributeMoney,
+      stop: redistributeMoney
     });
     $( "#comission" ).slider({
       orientation: "horizontal",
@@ -96,34 +110,27 @@
       max: 900,
       value: 27
     });
-    $( "#person1" ).slider( "value", 291 );
-    $( "#person2" ).slider( "value", 291 );
-    $( "#person3" ).slider( "value", 291 );
+    $( "#person1" ).slider( "value", 300 );
+    $( "#person2" ).slider( "value", 300 );
+    $( "#person3" ).slider( "value", 300 );
     $( "#comission").slider( "value", 27 );
-    money_amount = 12
-    $("#12").removeClass( "btn-primary" )
-    $("#12").addClass("btn-success")   
+    setActive("#12")  
   });
 $(function selectAmountByClick(){
   $("#8, #12, #25").click(function(event) {
-    event.preventDefault();
-    money_amount =parseFloat($(this).val().replace("$",""))
+    event.preventDefault();    
     $("#custom-amount").val("")
-    $("#8, #12, #25, #custom-amount").removeClass( "btn-success" )
-    $("#8, #12, #25, #custom-amount").addClass("btn-primary")
-    $(this).removeClass( "btn-primary" )
-    $(this).addClass("btn-success")
+    resetElements()
+    setActive(this)
   });
 
 })
 $(function selectAmountByTyping(){
   $("#custom-amount").click(function(event) {
     event.preventDefault();
-    $("#8, #12, #25").removeClass( "btn-success" )
-    $("#8, #12, #25").addClass("btn-primary")
+    resetElements()
     $(this).removeClass( "btn-primary" )
     $(this).val("$"+money_amount);
-    // $(this).addClass("btn-success")
   });
 
 })
@@ -179,7 +186,7 @@ $(function leaveSelectAmount(){
       <div id= "person1" ></div>
     </div>    
     <div class = "col-md-2">
-      <input type = "text" class="btn btn-success">
+      <input id = "person1-amount" type = "text" class="btn btn-success">
     </div>    
   </div>
   <div class = "row">
@@ -190,7 +197,7 @@ $(function leaveSelectAmount(){
       <div id= "person2" ></div>
     </div>    
     <div class = "col-md-2">
-      <input type = "text" class="btn btn-success">
+      <input id = "person2-amount" type = "text" class="btn btn-success">
     </div>    
   </div>
   <div class = "row">
@@ -201,7 +208,7 @@ $(function leaveSelectAmount(){
       <div id = "person3" ></div>
     </div>    
     <div class = "col-md-2">
-      <input type = "text" class="btn btn-success">
+      <input id = "person3-amount" type = "text" class="btn btn-success">
     </div>    
   </div>
   <div class = "row">
@@ -212,9 +219,9 @@ $(function leaveSelectAmount(){
       <div id = "comission" ></div>
     </div>    
     <div class = "col-md-2">
-      <input type = "text" class="btn btn-success">
+      <input id = "comission-amount" type = "text" class="btn btn-success">
     </div>    
-  </div>
+  </div> 
 </div>
 
  
