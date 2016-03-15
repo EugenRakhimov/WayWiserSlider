@@ -4,12 +4,30 @@
     width: 70px;
     height: 26px;
   }
+  .btn-primary {
+    background-color: #a1a7b2;    
+  }
   .slider-holder {
     padding-top: 0.4em;
     padding-bottom: 0.4em;
   }
   #custom-amount {
-    width: 10em;
+    width: 10em;    
+  }
+  ::-webkit-input-placeholder {
+   color: white;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+    color: white;  
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+    color: white;  
+  }
+
+  :-ms-input-placeholder {  
+    color: white;  
   }
   .ui-slider-horizontal .ui-slider-handle {
     background-image: url("/assets/ic_code_black_18dp_2x.png");
@@ -19,26 +37,61 @@
  
 </style>
   <script>
-    function redistributeMoney() {
+    var money_amount;
+    function redistributeMoney(event,ui) {
+      // console.log(ui.handle.parentNode.id);
     var person1 = $( "#person1" ).slider( "value" ),
       person2 = $( "#person2" ).slider( "value" ),
       person3 = $( "#person3" ).slider( "value" ),
       comission = $( "#comission" ).slider( "value" )
+      change = 900 - person1 - person2 - person3 - comission
+      if (change%2 == 0){
+        if (ui.handle.parentNode.id =="person1") 
+          {
+            $( "#person2" ).slider( "value", person2+(change/2) );
+            $( "#person3" ).slider( "value", person3+(change/2) );
+          };
+      }
+      else
+      { var dif = change-Math.round((change/2))
+            var dif2 = change -dif 
+            if(Math.random()> 0.5)
+            {
+              var temp = dif
+              dif = dif2
+              dif2 = temp
+            }
+            console.log(dif, dif2)
+        if (ui.handle.parentNode.id == "person1") 
+          { 
+            $( "#person2" ).slider( "value", person2+dif2);
+            $( "#person3" ).slider( "value", person3+dif);
+          }; 
+      }
+
+
     }
     $(function() {
-    $( "#person1, #person2, #person3, #comission" ).slider({
+    $( "#person1, #person2, #person3" ).slider({
       orientation: "horizontal",
       range: "min",
-      max: 300,
+      max: 900,
       value: 127,
-      slide: redistributeMoney,
-      change: redistributeMoney
+      slide: redistributeMoney
     });
-    $( "#person1" ).slider( "value", 100 );
-    $( "#person2" ).slider( "value", 100 );
-    $( "#person3" ).slider( "value", 100 );
-    $( "#comission").slider( "value", 100 );
+    $( "#comission" ).slider({
+      orientation: "horizontal",
+      disabled: true,
+      range: "min",
+      max: 900,
+      value: 27
+    });
+    $( "#person1" ).slider( "value", 291 );
+    $( "#person2" ).slider( "value", 291 );
+    $( "#person3" ).slider( "value", 291 );
+    $( "#comission").slider( "value", 27 );
   });
+    // $( "#person1, #person2, #person3" ).on( "slide", function( event, ui ) {console.log(ui.value)} );
   </script>
 <div class = "container">
   <div class = "row">
@@ -49,25 +102,31 @@
     </div>    
   </div>
   <div class = "row">
-    <div class="col-md-2"><p><strong>Pay what you want!</strong></p></div>
-    <div class="col-md-1">
+    <div class = "col-md-2"><p><strong>Pay what you want!</strong></p></div>
+    <div class = "col-md-1">
       <input type="button" class="btn btn-primary btn-sm" value="$8">
     </div>
-    <div class="col-md-1">
+    <div class ="col-md-1">
       <input type="button" class="btn btn-primary btn-sm" value="$12">
     </div>
-    <div class="col-md-1">
+    <div class = "col-md-1">
       <input type="button" class="btn btn-primary btn-sm btn-active" value="$24">
     </div>
-    <div class="col-md-3">
+    <div class = "col-md-3">
       <input id = "custom-amount" type="text" class="btn btn-primary btn-sm" placeholder="Custom amount">
+    </div>
+  </div>
+  <div class = "row">
+    <div class = "col-md-3">
+      <p>Choose where your money goes
+      </p>
     </div>
   </div>
   <div class = "row">
     <div class = "col-md-1">
       <p>Person 1</p>
     </div>
-    <div class="col-md-4 slider-holder ">
+    <div class="col-md-5 slider-holder ">
       <div id= "person1" ></div>
     </div>    
     <div class = "col-md-2">
@@ -78,7 +137,7 @@
     <div class = "col-md-1">
       <p>Person 2</p>
     </div>
-    <div class="col-md-4 slider-holder ">
+    <div class="col-md-5 slider-holder ">
       <div id= "person2" ></div>
     </div>    
     <div class = "col-md-2">
@@ -89,8 +148,8 @@
     <div class = "col-md-1">
       <p>Person 3</p>
     </div>
-    <div class="col-md-4 slider-holder ">
-      <div id= "person3" ></div>
+    <div class = "col-md-5 slider-holder ">
+      <div id = "person3" ></div>
     </div>    
     <div class = "col-md-2">
       <input type = "text" class="btn btn-success">
@@ -100,8 +159,8 @@
     <div class = "col-md-1">
       <p>Comission</p>
     </div>
-    <div class="col-md-4 slider-holder ">
-      <div id= "comission" ></div>
+    <div class ="col-md-5 slider-holder ">
+      <div id = "comission" ></div>
     </div>    
     <div class = "col-md-2">
       <input type = "text" class="btn btn-success">
