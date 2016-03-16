@@ -13,3 +13,49 @@
  *= require_tree .
  *= require_self
  */
+
+.btn {
+  border-radius: 40px;
+  width: 85px;
+  height: 26px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+  border-radius: 40px;
+  outline: none;
+}
+.btn-primary {
+  background-color: #a1a7b2;  
+  border-color:   #a1a7b2;
+}
+.slider-holder {
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}
+#custom-amount {
+  width: 10em;   
+  font-weight: bold;
+  border-color:#a1a7b2;
+}
+::-webkit-input-placeholder {
+ color: white;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: white;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  color: white;  
+}
+
+:-ms-input-placeholder {  
+  color: white;  
+}
+.ui-slider-horizontal .ui-slider-handle {
+  background-image: url("/assets/ic_code_black_18dp_2x.png");
+  background-size:     cover;
+}
